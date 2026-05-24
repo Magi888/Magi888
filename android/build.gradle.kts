@@ -22,15 +22,25 @@ subprojects {
     project.evaluationDependsOn(":app")
 }
 
-/// Codemagic / шинэ AGP: flutter_facebook_auth зэрэг дэд төслүүдийн Java 1.8 vs Kotlin 17 зөрчлийг арилгана.
+/// Codemagic / Flutter: дефолт JVM 17 — afterEvaluate («already evaluated») ашиглахгүй.
 subprojects {
-    afterEvaluate {
+    pluginManager.withPlugin("com.android.application") {
         extensions.findByType<BaseExtension>()?.apply {
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_17
                 targetCompatibility = JavaVersion.VERSION_17
             }
         }
+    }
+    pluginManager.withPlugin("com.android.library") {
+        extensions.findByType<BaseExtension>()?.apply {
+            compileOptions {
+                sourceCompatibility = JavaVersion.VERSION_17
+                targetCompatibility = JavaVersion.VERSION_17
+            }
+        }
+    }
+    pluginManager.withPlugin("org.jetbrains.kotlin.android") {
         tasks.withType<KotlinCompile>().configureEach {
             compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
         }
