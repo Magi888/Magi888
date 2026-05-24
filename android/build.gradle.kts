@@ -1,6 +1,6 @@
 import com.android.build.gradle.BaseExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 allprojects {
     repositories {
         google()
@@ -32,9 +32,7 @@ subprojects {
             }
         }
         tasks.withType<KotlinCompile>().configureEach {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
+            compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 }
