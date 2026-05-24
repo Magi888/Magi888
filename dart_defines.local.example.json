@@ -1,0 +1,6 @@
+{
+  "STRIPE_PUBLISHABLE_KEY": "pk_test_Stripe_Dashboard_оос",
+  "STRIPE_PAYMENT_INTENT_URL": "https://europe-west3-YOUR_FIREBASE_PROJECT_ID.cloudfunctions.net/createPaymentIntent",
+  "STRIPE_BACKEND_BEARER": "",
+  "CHECKOUT_VOO_URL": ""
+}

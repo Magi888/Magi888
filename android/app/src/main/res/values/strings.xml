@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MoneySENT</string>
+    <!-- Meta for Developers: App → Settings → замаас App ID, Client token авна.
+         Доорхыг жинхэнэ утгаар солино (яг ижил App ID-г хоёр газар ашиглана). -->
+    <string name="facebook_app_id">000000000000000</string>
+    <string name="fb_login_protocol_scheme">fb000000000000000</string>
+    <string name="facebook_client_token">REPLACE_WITH_META_CLIENT_TOKEN</string>
+
+    <!-- Google Sign-In (Android): Web application OAuth 2.0 Client ID -->
+    <string name="default_web_client_id" translatable="false">185168005519-4tc6c58a3dod1jhebs89uc8d98fo1dl1.apps.googleusercontent.com</string>
+</resources>

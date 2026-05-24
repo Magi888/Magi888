@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "167810278670",
+    "project_id": "mongol-service-de",
+    "storage_bucket": "mongol-service-de.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167810278670:android:94a6712a1527e4f6afe35f",
+        "android_client_info": {
+          "package_name": "com.example.moneysent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167810278670-pjm59ms7b97kpbe7p50bdv96jt81aoue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtCi7UoxwBmdBY6YJ8wOZd8voH1z5ZCho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167810278670-pjm59ms7b97kpbe7p50bdv96jt81aoue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167810278670:android:7bf5633cd9e0a049afe35f",
+        "android_client_info": {
+          "package_name": "com.promon.mongolservicede"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167810278670-g6hiqs6kh4tlchrllg80ro73nd0cm079.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.promon.mongolservicede",
+            "certificate_hash": "f1b54b1ff9e9186c2ff742db85458b4e9c6a9568"
+          }
+        },
+        {
+          "client_id": "167810278670-pjm59ms7b97kpbe7p50bdv96jt81aoue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtCi7UoxwBmdBY6YJ8wOZd8voH1z5ZCho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167810278670-pjm59ms7b97kpbe7p50bdv96jt81aoue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
