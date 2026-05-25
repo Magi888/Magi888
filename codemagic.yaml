@@ -30,4 +30,4 @@ workflows:
           set -e
           flutter build ipa --export-method app-store
     artifacts:
-      - build/ios/ipa/*.ipa
+       - build/ios/ipa/**/*.ipa
