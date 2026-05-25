@@ -1,33 +1,34 @@
 workflows:
   ios-release:
     name: iOS Release Build
+
     environment:
       flutter: stable
       xcode: latest
       cocoapods: default
+
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.topfilesLLC.Moneysent
+
     scripts:
       - name: Get Flutter packages
         script: |
-          set -e
           flutter pub get
-      - name: Generate Podfile
-        script: |
-          set -e
-          flutter build ios --config-only --no-codesign
+
       - name: Install CocoaPods dependencies
         script: |
-          set -e
-          cd ios && pod install --repo-update
-      - name: Apply provisioning profiles on Xcode workspace
+          cd ios
+          pod install
+          cd ..
+
+      - name: Apply provisioning profiles
         script: |
-          set -e
-          xcode-project use-profiles
+          xcode-project use-profiles --workspace ios/Runner.xcworkspace
+
       - name: Build signed IPA
         script: |
-          set -e
           flutter build ipa --export-method app-store
+
     artifacts:
-       - build/ios/ipa/**/*.ipa
+      - build/ios/ipa/**/*.ipa
