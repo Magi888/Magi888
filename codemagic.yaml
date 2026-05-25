@@ -28,6 +28,8 @@ workflows:
       - name: Build signed IPA
         script: |
           set -e
-          flutter build ipa --export-method app-store
+          xcode-project build-ipa \
+            --workspace ios/Runner.xcworkspace \
+            --scheme Runner
     artifacts:
       - build/ios/ipa/*.ipa
