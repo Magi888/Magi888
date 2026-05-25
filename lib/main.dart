@@ -16,7 +16,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:crypto/crypto.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:html/parser.dart' as html;
 import 'package:flutter_svg/flutter_svg.dart';
@@ -364,20 +363,10 @@ class ContactVerificationStore {
   }
 }
 
-bool _facebookLoginSupportedPlatform() {
+bool _googleLoginSupportedPlatform() {
   if (kIsWeb) return false;
   return defaultTargetPlatform == TargetPlatform.android ||
       defaultTargetPlatform == TargetPlatform.iOS;
-}
-
-bool _googleLoginSupportedPlatform() => _facebookLoginSupportedPlatform();
-
-String? _facebookPictureUrl(dynamic picture) {
-  if (picture is! Map) return null;
-  final data = picture['data'];
-  if (data is! Map) return null;
-  final url = data['url'];
-  return url is String ? url : null;
 }
 
 // ─── Biometric Store ───────────────────────────────────────────────
@@ -2132,7 +2121,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginState extends State<LoginScreen> with SingleTickerProviderStateMixin {
   int _tab = 0;
   bool _bioAvailable = false;
-  bool _fbBusy = false;
   bool _googleBusy = false;
   late AnimationController _ac;
   late Animation<double> _fade, _y;
@@ -2241,91 +2229,6 @@ class _LoginState extends State<LoginScreen> with SingleTickerProviderStateMixin
     }
   }
 
-  Future<void> _signInWithFacebook() async {
-    if (!_facebookLoginSupportedPlatform()) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: kRed,
-        content: Text(
-          'Facebook нэвтрэлт зөвхөн Android / iOS дээр ажиллана.',
-          style: GoogleFonts.notoSans(fontSize: 13),
-        ),
-      ));
-      return;
-    }
-    setState(() => _fbBusy = true);
-    try {
-      final result = await FacebookAuth.instance.login(
-        permissions: ['email', 'public_profile'],
-      );
-      if (!mounted) return;
-      if (result.status == LoginStatus.cancelled) {
-        setState(() => _fbBusy = false);
-        return;
-      }
-      if (result.status != LoginStatus.success || result.accessToken == null) {
-        setState(() => _fbBusy = false);
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: kRed,
-          content: Text(
-            result.message ?? 'Facebook нэвтрэлт амжилтгүй. Meta App ID болон Client Token-оо шалгана уу.',
-            style: GoogleFonts.notoSans(fontSize: 13, height: 1.35),
-          ),
-        ));
-        return;
-      }
-      final userData = await FacebookAuth.instance.getUserData(
-        fields: 'name,email,picture.width(200)',
-      );
-      if (!mounted) return;
-      setState(() => _fbBusy = false);
-      final name = (userData['name'] as String?)?.trim().isNotEmpty == true
-          ? (userData['name'] as String).trim()
-          : 'Facebook';
-      var email = (userData['email'] as String?)?.trim() ?? '';
-      final id = userData['id']?.toString() ?? '';
-      if (email.isEmpty && id.isNotEmpty) {
-        email = 'fb_$id@moneysent.facebook.local';
-      }
-      if (email.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: kRed,
-          content: Text(
-            'Facebook данснаас имэйл аваагүй. Имэйлийн зөвшөөрлийг Meta-д асаана уу.',
-            style: GoogleFonts.notoSans(fontSize: 13),
-          ),
-        ));
-        return;
-      }
-      final picUrl = _facebookPictureUrl(userData['picture']) ?? '';
-      await UserStore.setFacebook(n: name, e: email, avatar: picUrl);
-      if (!mounted) return;
-      await _goHome();
-    } on PlatformException catch (e) {
-      if (!mounted) return;
-      setState(() => _fbBusy = false);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: kRed,
-        content: Text(
-          'Facebook алдаа (${e.code}). App ID / Client Token / Package name / Key hash шалгана уу.',
-          style: GoogleFonts.notoSans(fontSize: 12, height: 1.35),
-        ),
-      ));
-    } catch (e) {
-      if (!mounted) return;
-      setState(() => _fbBusy = false);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: kRed,
-        content: Text('Facebook: $e', style: GoogleFonts.notoSans(fontSize: 12)),
-      ));
-    }
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
       backgroundColor:kBg,
@@ -2374,17 +2277,9 @@ class _LoginState extends State<LoginScreen> with SingleTickerProviderStateMixin
                           label: _googleBusy
                               ? 'Google-тай холбогдож байна…'
                               : 'Google-ээр нэвтрэх',
-                          onTap: (_googleBusy || _fbBusy)
-                              ? () {}
-                              : _signInWithGoogle),
+                          onTap: _googleBusy ? () {} : _signInWithGoogle),
                       const SizedBox(height:10),
                       _SBtn(apple:true, label:'Apple-ээр нэвтрэх', onTap: () { _goHome(); }),
-                      const SizedBox(height:10),
-                      _SBtn(
-                          icon: 'f',
-                          ic: const Color(0xFF1877F2),
-                          label: _fbBusy ? 'Facebook-тай холбогдож байна…' : 'Facebook-ээр нэвтрэх',
-                          onTap: (_fbBusy || _googleBusy) ? () {} : _signInWithFacebook),
                       const SizedBox(height:10),
                       // Нэгдсэн имэйл/утас товч
                       _SBtn(icon:'🔑', ic:kYellow, label:'Имэйл / Утасаар нэвтрэх', onTap:()=>setState(()=>_tab=1)),
@@ -8909,9 +8804,6 @@ class _ProfileState extends State<ProfileScreen> {
             ),
             OutlinedButton.icon(
                 onPressed: () async {
-                  try {
-                    await FacebookAuth.instance.logOut();
-                  } catch (_) {}
                   await UserStore.clearSession();
                   await AccountStore.load();
                   if (!context.mounted) return;

@@ -66,15 +66,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<!-- Facebook + Google URL schemes — CFBundleURLTypes нэг л удаа заавал -->
+	<!-- Google Sign-In URL scheme (reversed_client_id нь OAuth client-оос) -->
 	<key>CFBundleURLTypes</key>
 	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb000000000000000</string>
-			</array>
-		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -84,12 +78,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>FacebookAppID</key>
-	<string>000000000000000</string>
-	<key>FacebookClientToken</key>
-	<string>REPLACE_WITH_META_CLIENT_TOKEN</string>
-	<key>FacebookDisplayName</key>
-	<string>MoneySENT</string>
 	<!-- Google Sign-In: Cloud Console → iOS OAuth client-ийн Client ID -->
 	<key>GIDClientID</key>
 	<string>YOUR_IOS_CLIENT_ID.apps.googleusercontent.com</string>
@@ -97,10 +85,6 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>mailto</string>
-		<string>fbapi</string>
-		<string>fb-messenger-share-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
 		<string>googlechrome</string>
 		<string>googlechromes</string>
 	</array>

@@ -26,10 +26,20 @@ subprojects {
 }
 
 /**
- * Plugins like flutter_facebook_auth leave Javac at default Java 8 while Kotlin compiles at 17.
- * `options.release` sets bytecode level on the javac tasks without reopening finalized compileOptions DSL.
+ * Third-party Android libraries that omit compileOptions leave Javac at 8; Kotlin stacks at 17.
+ * Task-level release / jvmTarget keeps targets aligned without finalized compileOptions conflicts.
  */
-
+subprojects {
+    afterEvaluate {
+        tasks.withType<JavaCompile>().configureEach {
+            options.encoding = "UTF-8"
+            options.release.set(17)
+        }
+        tasks.withType<KotlinCompile>().configureEach {
+            compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+}
 
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
