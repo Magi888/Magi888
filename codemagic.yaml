@@ -1,8 +1,7 @@
 # Apple / Codemagic:
-# • developer.apple.com → Identifiers: com.topfilesLLC.Moneysent (кодонд ба ADP-д яг адилхан)
-# • Profiles: уг App ID-д **Distribution → App Store** profile
-# • Codemagic вэб → Application → Distribution / Integrations → **App Store Connect API key**
-# • Хэрэв API key-г YAML-ээр холбох бол: workflows → integrations → app_store_connect: «интеграцийн яг нэр»
+# • developer.apple.com → Identifiers: com.topfilesLLC.Moneysent
+# • Profiles: App Store distribution
+# • Team → Code signing identities: Distribution cert + App Store profile
 #
 workflows:
   ios-release:
@@ -11,6 +10,7 @@ workflows:
     environment:
       flutter: stable
       xcode: latest
+      cocoapods: default
 
       ios_signing:
         distribution_type: app_store
@@ -19,11 +19,23 @@ workflows:
     scripts:
       - name: Get Flutter packages
         script: |
+          set -e
           flutter pub get
+
+      - name: Install CocoaPods dependencies
+        script: |
+          set -e
+          cd ios && pod install
+
+      - name: Apply provisioning profiles on Xcode workspace
+        script: |
+          set -e
+          xcode-project use-profiles --workspace ios/Runner.xcworkspace
 
       - name: Build signed IPA
         script: |
-          flutter build ipa
+          set -e
+          flutter build ipa --export-method app-store
 
     artifacts:
       - build/ios/ipa/*.ipa
