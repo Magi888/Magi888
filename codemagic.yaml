@@ -20,7 +20,9 @@ workflows:
       - name: Install CocoaPods dependencies
         script: |
           set -e
-          cd ios && pod install --repo-update
+          cd ios
+          rm -f Podfile.lock
+          pod install --repo-update
       - name: Apply provisioning profiles on Xcode workspace
         script: |
           set -e
