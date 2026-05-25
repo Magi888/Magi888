@@ -3,7 +3,7 @@ workflows:
     name: iOS Release Build
     environment:
       flutter: stable
-      xcode: latest
+      xcode: 15.4
       cocoapods: default
       ios_signing:
         distribution_type: app_store
@@ -19,15 +19,13 @@ workflows:
           cd ios
           rm -f Podfile.lock
           pod install --repo-update
-      - name: Apply provisioning profiles on Xcode workspace
+      - name: Apply provisioning profiles
         script: |
           set -e
           xcode-project use-profiles
       - name: Build signed IPA
         script: |
           set -e
-          xcode-project build-ipa \
-            --workspace ios/Runner.xcworkspace \
-            --scheme Runner
+          flutter build ipa --export-method app-store
     artifacts:
       - build/ios/ipa/*.ipa
