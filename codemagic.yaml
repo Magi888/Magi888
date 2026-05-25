@@ -13,10 +13,6 @@ workflows:
         script: |
           set -e
           flutter pub get
-      - name: Generate Podfile
-        script: |
-          set -e
-          flutter build ios --config-only --no-codesign
       - name: Install CocoaPods dependencies
         script: |
           set -e
