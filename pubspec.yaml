@@ -29,7 +29,6 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_launcher_icons: ^0.14.3
 
-# Launcher icon: төслийн үндсэн хавтаснаас generate_launcher_icons.bat ажиллуулна уу
 flutter_launcher_icons:
   android: true
   ios: true
@@ -42,4 +41,3 @@ flutter:
   assets:
     - assets/logo.png
     - assets/blz_de.json
-    - blz-aktuell-csv-zip-data/BLZ.CSV
