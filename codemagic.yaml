@@ -1,6 +1,8 @@
 workflows:
   ios-release:
     name: iOS Release Build
+    integrations:
+      app_store_connect: Codemagic
     environment:
       flutter: stable
       xcode: 16.4
