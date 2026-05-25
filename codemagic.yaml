@@ -3,7 +3,7 @@ workflows:
     name: iOS Release Build
     environment:
       flutter: stable
-      xcode: 15.4
+      xcode: 16.4
       cocoapods: default
       ios_signing:
         distribution_type: app_store
