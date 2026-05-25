@@ -4,6 +4,20 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	
+	<key>NSCameraUsageDescription</key>
+	<string>Биеийн баталгаажуулалт болон тоног төхөөрөмжид зориулсан зураг авах</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Профайл болон шилжүүлгийн нотолгоо оруулахын тулд зураг сонгох</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Шилжүүлгийн баримтыг хадгалах</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Видео бичлэг авахад дуу хураахад</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Аппликешн руу аюулгүйгээр нэвтрэх</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Аппликейшнтэй холбоотой үйлчилгээ өгөх</string>
+	
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -66,7 +80,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<!-- Google Sign-In URL scheme (reversed_client_id нь OAuth client-оос) -->
+	
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -78,10 +92,10 @@
 			</array>
 		</dict>
 	</array>
-	<!-- Google Sign-In: Cloud Console → iOS OAuth client-ийн Client ID -->
+	
 	<key>GIDClientID</key>
-	<string>YOUR_IOS_CLIENT_ID.apps.googleusercontent.com</string>
-	<!-- Google URL scheme: iOS OAuth client JSON → reversed_client_id -->
+	<string>185168005519-ihh23n648rnih3ol1u5ji4eainun74te.apps.googleusercontent.com</string>
+	
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>mailto</string>
