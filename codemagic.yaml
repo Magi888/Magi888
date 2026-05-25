@@ -1,3 +1,9 @@
+# Apple / Codemagic:
+# • developer.apple.com → Identifiers: com.topfilesLLC.Moneysent (кодонд ба ADP-д яг адилхан)
+# • Profiles: уг App ID-д **Distribution → App Store** profile
+# • Codemagic вэб → Application → Distribution / Integrations → **App Store Connect API key**
+# • Хэрэв API key-г YAML-ээр холбох бол: workflows → integrations → app_store_connect: «интеграцийн яг нэр»
+#
 workflows:
   ios-release:
     name: iOS Release Build
