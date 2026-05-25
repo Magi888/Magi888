@@ -13,10 +13,14 @@ workflows:
         script: |
           set -e
           flutter pub get
+      - name: Generate iOS folder
+        script: |
+          set -e
+          flutter create --platforms=ios .
       - name: Install CocoaPods dependencies
         script: |
           set -e
-          cd ios && pod install
+          cd ios && pod install --repo-update
       - name: Apply provisioning profiles on Xcode workspace
         script: |
           set -e
