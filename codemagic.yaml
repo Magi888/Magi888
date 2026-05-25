@@ -24,7 +24,7 @@ workflows:
       - name: Apply provisioning profiles on Xcode workspace
         script: |
           set -e
-          xcode-project use-profiles --workspace ios/Runner.xcworkspace
+          xcode-project use-profiles
       - name: Build signed IPA
         script: |
           set -e
