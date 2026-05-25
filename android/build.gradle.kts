@@ -25,14 +25,19 @@ subprojects {
     project.evaluationDependsOn(":app")
 }
 
-// JVM 17: compileOptions блокыг давин гаргалгүй task-level тохируулна (Gradle/AGP "finalized" алдаагаас сална).
+/**
+ * Plugins like flutter_facebook_auth leave Javac at default Java 8 while Kotlin compiles at 17.
+ * `options.release` sets bytecode level on the javac tasks without reopening finalized compileOptions DSL.
+ */
 subprojects {
-    tasks.withType<JavaCompile>().configureEach {
-        sourceCompatibility = JavaVersion.VERSION_17.toString()
-        targetCompatibility = JavaVersion.VERSION_17.toString()
-    }
-    tasks.withType<KotlinCompile>().configureEach {
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+    afterEvaluate {
+        tasks.withType<JavaCompile>().configureEach {
+            options.encoding = "UTF-8"
+            options.release.set(17)
+        }
+        tasks.withType<KotlinCompile>().configureEach {
+            compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+        }
     }
 }
 
