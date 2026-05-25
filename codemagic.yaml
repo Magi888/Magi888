@@ -5,7 +5,7 @@ workflows:
       app_store_connect: Codemagic
     environment:
       flutter: stable
-      xcode: 16.4
+      xcode: 26.4
       cocoapods: default
       ios_signing:
         distribution_type: app_store
