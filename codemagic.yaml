@@ -1,7 +1,16 @@
 # Apple / Codemagic:
+<<<<<<< HEAD
 # • developer.apple.com → Identifiers: com.topfilesLLC.Moneysent
 # • Profiles: App Store distribution
 # • Team → Code signing identities: Distribution cert + App Store profile
+=======
+# • developer.apple.com → Identifiers: com.topfilesLLC.Moneysent (кодонд ба ADP-д яг адилхан)
+# • Profiles: уг App ID-д **Distribution → App Store** profile
+# • Codemagic Team → Codemagic.yaml settings → **Code signing identities**:
+#     Apple Distribution серт + Bundle ID-д таарсан App Store profile
+# • Asc API key (.p8) → Team integrations-д оруулсан (generate/fetch-д)
+# Локал Windows: `xcode-project` болон `cd ios && …` нь PowerShell-той ижил биш; Codemagic дээр bash ашиглана.
+>>>>>>> 8325f5a (Improve Codemagic iOS workflow)
 #
 workflows:
   ios-release:
@@ -32,6 +41,10 @@ workflows:
           set -e
           xcode-project use-profiles --workspace ios/Runner.xcworkspace
 
+<<<<<<< HEAD
+=======
+      # Зарим Flutter хувилбарт `flutter build ipa` нь --release параметр үл хүлээн авдаг (release default).
+>>>>>>> 8325f5a (Improve Codemagic iOS workflow)
       - name: Build signed IPA
         script: |
           set -e

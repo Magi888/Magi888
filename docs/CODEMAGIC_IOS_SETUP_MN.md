@@ -56,7 +56,7 @@ IPA build логонд зөвхөн `flutter build ipa` байвал **YAML аж
 
 ## 5. Шалгалт дахин build
 
-Build амжилттай болсны дараа логонд `flutter pub get`, `pod install`, `xcode-project use-profiles`, `flutter build ipa --release --export-method app-store` алхмууд дарааллаар орсон байх хэрэгтэй.
+Build амжилттай болсон эсэхийг шалгахад логоор `flutter pub get`, `pod install`, `xcode-project use-profiles`, дараа нь `flutter build ipa --export-method app-store` (олон хувилбарт `--release` шаардлагагүй — байхгүй бол алдаанаас авна) гэж алхмууд дарааллаар орсон байх ёстой.
 
 Алдаа гарвал **Set up code signing identities** ба **Build signed IPA** алхмуудын **бүтэн логийг** буулгаж үлдээ.
 
